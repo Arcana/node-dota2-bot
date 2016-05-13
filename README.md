@@ -7,7 +7,7 @@ Wrapper around the node-dota2 library which handles all log-in shennanigans. Thi
 ### Basic Bot
 ```javascript
 'use strict'
-const DotaBot = require('./DotaBot');
+const DotaBot = require("DotaBot");
 
 var logonDetails = {account_name: 'username', password:'password'};
 var bot = new DotaBot(logonDetails, true);
@@ -17,7 +17,7 @@ bot.connect();
 ### Extending
 ```javascript
 'use strict'
-const DotaBot = require('DotaBot'),
+const DotaBot = require("DotaBot"),
       Dota2   = require("dota2");
     
 module.exports = class MyBot extends DotaBot{
