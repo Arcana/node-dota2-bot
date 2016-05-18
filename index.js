@@ -12,13 +12,18 @@ module.exports = class Bot {
      * Constructor of the Bot. This prepares an object for connecting to Steam
      * and the Dota2 Game Coordinator.
      * @param logonDetails {account_name: 'user', password: 'password'}
+     * @param debug boolean
+     * @param debug boolean
      **/
-    constructor (logonDetails, debug) {
-        this.debug = debug;
+    constructor (logonDetails, debug, debugMore) {
+        this.ready         = false;
+        this.debug         = debug;
+        this.debugMore     = debugMore;
         this._logonDetails = logonDetails;
-        this.steamClient = new steam.SteamClient();
-        this.steamUser = new steam.SteamUser(this.steamClient);
-        this.steamFriends = new steam.SteamFriends(this.steamClient);
+        this.steamClient   = new steam.SteamClient();
+        this.steamUser     = new steam.SteamUser(this.steamClient);
+        this.steamFriends  = new steam.SteamFriends(this.steamClient);
+        this.Dota2         = new dota2.Dota2Client(this.steamClient, debug, debugMore);
         
         let self = this;
         
@@ -28,25 +33,25 @@ module.exports = class Bot {
         },
         onSteamLogOn    = function onSteamLogOn(logonResp){
             if (logonResp.eresult == steam.EResult.OK) {
-                self.game = new dota2.Dota2Client(self.steamClient, debug, false);
                 // Set status to online
                 self.steamFriends.setPersonaState(steam.EPersonaState.Online);
                 // Set nickname
                 self.steamFriends.setPersonaName(self._logonDetails.account_name);
                 
-                if (debug) util.log('Logged on with id = '+self.game.ToAccountID(self.game._client.steamID));
-                self.game.launch();
-                self.game.on('ready', function(){
+                if (debug) util.log('Logged on with id = '+self.Dota2.ToAccountID(self.Dota2._client.steamID));
+                self.Dota2.launch();
+                self.Dota2.once('ready', function(){
+                    self.ready = true;
                     if (self.callback) {
                         self.callback();
                         self.callback = undefined;
                     }
                 });
-                self.game.on('unready', function onUnready() {
+                self.Dota2.once('unready', function onUnready() {
                     if (debug) util.log("Node-dota2 unready.");
                     self.ready = false;
                 });
-                self.game.on('unhandled', function(kMsg) {
+                self.Dota2.once('unhandled', function(kMsg) {
                     if (debug) util.log("UNHANDLED MESSAGE " + kMsg);
                 });
             }
@@ -56,10 +61,12 @@ module.exports = class Bot {
             fs.writeFile('servers', JSON.stringify(servers));
         },
         onSteamLogOff   = function onSteamLogOff(eresult) {
-            if (debug) util.log("Logged off from Steam.");
+            if (debug) util.log("Logged off from Steam. Trying reconnect");
+            self.steamUser.logOn(self._logonDetails);
         },
         onSteamError    = function onSteamError(error) {
-            if (debug) util.log("Connection closed by server.");
+            if (debug) util.log("Connection closed by server. Trying reconnect");
+            self.steamClient.reconnect();
         };
         this.steamClient.on('connected', onConnected);
         this.steamClient.on('logOnResponse', onSteamLogOn);
@@ -88,7 +95,7 @@ module.exports = class Bot {
      * Disconnect from the Game Coordinator. 
      **/
     disconnect() {
-        this.game.exit();
+        this.Dota2.exit();
         this.steamClient.disconnect();
     }
     
