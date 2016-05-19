@@ -31,15 +31,43 @@ Connect to Steam and the Dota2 GC. The Bot will keep the connections alive until
 #### disconnect ()
 Disconnect from Steam and the Dota2 GC.
 
+#### schedule(fn)
+* `fn` Function to schedule for execution as soon as the GC is available
+
 ### Example
+
+#### Script
 ```javascript
 'use strict'
 const DotaBot = require("DotaBot");
 
 var logonDetails = {account_name: 'username', password:'password'};
 var bot = new Bot(logonDetails, true, false);
-bot.connect(()=>{
-    console.log('We are connected!');
-    setTimeout(()=>{bot.disconnect();}, 5000);
+bot.Dota2.on("profileCardData", function (accId, data) {
+    console.log(JSON.stringify(data));
 });
+bot.connect();
+bot.schedule(()=>{bot.Dota2.requestProfileCard(63470426);});
+setTimeout(()=>{bot.disconnect();}, 25000);
+```
+
+#### Output
+```
+Scheduling job
+19 May 12:16:07 - Connected, logging on..
+19 May 12:16:07 - Logged on with id = **********
+19 May 12:16:07 - Launching Dota 2
+19 May 12:16:07 - Received servers.
+19 May 12:16:07 - sentryfile saved
+19 May 12:16:08 - Sending ClientHello
+19 May 12:16:08 - Received client welcome.
+19 May 12:16:08 - Activating queue
+19 May 12:16:08 - Executing job
+19 May 12:16:08 - Sending profile card request
+19 May 12:16:08 - Queue is empty, going idle
+19 May 12:16:09 - Cache subscribed, type 7
+19 May 12:16:09 - Unknown cache ID: 7
+19 May 12:16:09 - Received profile card data for: 63470426
+{"account_id":63470426,"background_def_index":0, ...
+19 May 12:16:26 - Exiting Dota 2
 ```
