@@ -1,4 +1,4 @@
-# node-dota2-bot
+# dota2-bot
 Wrapper around the node-dota2 library which handles all log-in shenanigans. 
 This basic DotaBot class prepares an object for connection to Steam and the 
 Dota2 Game Coordinator. As soon as `connect(callback)` is called, the DotaBot 
@@ -6,10 +6,11 @@ connects to Steam and the Dota2 GC. As soon as all connections are made,
 the queue is started. From then on, all scheduled functions will be executed as 
 soon as the GC is available.
 
+[![npm](https://img.shields.io/npm/v/dota2-bot.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/dota2-bot)
+
 ## Usage
 ### Installation
-Clone the Git repo and run `npm install`. This'll probably be put on npm in the 
-near future.
+Run `npm install dota2-bot` to install the package or clone from GitHub
 
 ### Properties
 * `steamClient` The steam client used to interact with Steam. See node-steam for details.
