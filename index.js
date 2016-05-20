@@ -7,10 +7,10 @@ const steam = require("steam"),
     dota2   = require("dota2"),
     queue   = require("./queue");
 
-module.exports = class Bot {
+module.exports = class DotaBot {
     /**
-     * Constructor of the Bot. This prepares an object for connecting to Steam
-     * and the Dota2 Game Coordinator.
+     * Constructor of the DotaBot. This prepares an object for connecting to
+     * Steam and the Dota2 Game Coordinator.
      * @param logonDetails {account_name: 'user', password: 'password'}
      * @param debug boolean
      * @param debug boolean

@@ -3,8 +3,8 @@ Wrapper around the node-dota2 library which handles all log-in shenanigans.
 This basic DotaBot class prepares an object for connection to Steam and the 
 Dota2 Game Coordinator. As soon as `connect(callback)` is called, the DotaBot 
 connects to Steam and the Dota2 GC. As soon as all connections are made, 
-callback is invoked. From then on, you can interact with the Dota2Client via the
-Dota2 property.
+the queue is started. From then on, all scheduled functions will be executed as 
+soon as the GC is available.
 
 ## Usage
 ### Installation
@@ -23,10 +23,10 @@ near future.
 * `debug` Boolean indicating whether or not basic debug info should be shown
 * `debugMore`Boolean indicating whether or not advanced debug info should be shown
 
-Creates a new Bot ready to connect to Steam and the Dota2 GC
+Creates a new DotaBot ready to connect to Steam and the Dota2 GC
 
 #### connect ()
-Connect to Steam and the Dota2 GC. The Bot will keep the connections alive until `disconnect()` is called
+Connect to Steam and the Dota2 GC. DotaBot will keep the connections alive until `disconnect()` is called
 
 #### disconnect ()
 Disconnect from Steam and the Dota2 GC.
@@ -42,7 +42,7 @@ Disconnect from Steam and the Dota2 GC.
 const DotaBot = require("DotaBot");
 
 var logonDetails = {account_name: 'username', password:'password'};
-var bot = new Bot(logonDetails, true, false);
+var bot = new DotaBot(logonDetails, true, false);
 bot.Dota2.on("profileCardData", function (accId, data) {
     console.log(JSON.stringify(data));
 });
@@ -53,7 +53,8 @@ setTimeout(()=>{bot.disconnect();}, 25000);
 
 #### Output
 ```
-Scheduling job
+19 May 12:16:07 - Blocking queue
+19 May 12:16:07 - Scheduling job
 19 May 12:16:07 - Connected, logging on..
 19 May 12:16:07 - Logged on with id = **********
 19 May 12:16:07 - Launching Dota 2
