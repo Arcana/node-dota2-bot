@@ -17,6 +17,7 @@ Run `npm install dota2-bot` to install the package or clone from GitHub
 * `steamUser` The steam user for account-related functionality, including logon.. See node-steam for details.
 * `steamFriends` The steam friends for community functionality, such as chats and friend messages. See node-steam for details.
 * `Dota2` The Dota2Client for interaction with the Dota2 Game Coordinator. See node-dota2 for details.
+
 #### Getters / Setters
 * `state` The current state of the queue (only getter).
 * `rate_limit` The current rate limiting factor, i.e. the time in milliseconds between requests.
