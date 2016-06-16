@@ -13,10 +13,10 @@ module.exports = class DotaBot {
      * Steam and the Dota2 Game Coordinator.
      * @param logonDetails {account_name: 'user', password: 'password'}
      * @param debug boolean
-     * @param debug boolean
+     * @param debugMore boolean
      **/
     constructor (logonDetails, debug, debugMore) {
-        this._queue         = new queue(10000, true);
+        this._queue         = new queue(null, null, true);
         this._debug         = debug;
         this._debugMore     = debugMore;
         this._logonDetails = logonDetails;
@@ -84,6 +84,43 @@ module.exports = class DotaBot {
             callback({ sha_file: crypto.createHash('sha1').update(sentry.bytes).digest() });
         };
         this.steamUser.on('updateMachineAuth', onUpdateMachineAuth);
+    }
+    
+    /**
+     * Get the current state of the queue
+     **/
+    get state() {
+        return this._queue.state;
+    }
+    
+    /**
+     * Get the current rate limit factor 
+     **/
+    get rate_limit() {
+        return this._queue.rate_limit;
+    }
+    
+    /**
+     * Set the rate limiting factor
+     * @param rate_limit #millis to wait between requests
+     **/
+    set rate_limit(rate_limit) {
+        this._queue.rate_limit = rate_limit;
+    }
+    
+    /**
+     * Get the current backoff time of the queue 
+     **/
+    get backoff() {
+        return this._queue.backoff;
+    }
+    
+    /**
+    * Set the backoff time of the queue
+    * @param backoff #millis for exponential backoff
+    **/
+    set backoff(backoff) {
+        this._queue.backoff = backoff;
     }
     
     /**

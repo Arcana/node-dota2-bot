@@ -1,6 +1,6 @@
 {
   "name": "dota2-bot",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A wrapper around the dota2 library that handles all login shenanigans",
   "main": "index.js",
   "scripts": {
