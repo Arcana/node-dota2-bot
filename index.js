@@ -16,14 +16,19 @@ module.exports = class DotaBot {
      * @param debugMore boolean
      **/
     constructor (logonDetails, debug, debugMore) {
-        this._queue         = new queue(null, null, true);
-        this._debug         = debug;
-        this._debugMore     = debugMore;
-        this._logonDetails = logonDetails;
-        this.steamClient   = new steam.SteamClient();
-        this.steamUser     = new steam.SteamUser(this.steamClient);
-        this.steamFriends  = new steam.SteamFriends(this.steamClient);
-        this.Dota2         = new dota2.Dota2Client(this.steamClient, debug, debugMore);
+        this._queue             = new queue(null, null, true);
+        this._debug             = debug;
+        this._debugMore         = debugMore;
+        this._logonDetails      = logonDetails;
+        this.steamClient        = new steam.SteamClient();
+        this.steamUser          = new steam.SteamUser(this.steamClient);
+        this.steamFriends       = new steam.SteamFriends(this.steamClient);
+        this.Dota2              = new dota2.Dota2Client(this.steamClient, debug, debugMore);
+        // Properties are not properly exported on the instance, so need to re-add them
+        this.Dota2.schema       = dota2.schema;
+        this.Dota2.ServerRegion = dota2.ServerRegion;
+        this.Dota2.EResult      = dota2.EResult;
+        this.Dota2.Seriestype   = dota2.SeriesType;
         
         let self = this;
         // Block queue until GC is ready
@@ -70,7 +75,7 @@ module.exports = class DotaBot {
             if (debug) util.log("Connection closed by server. Trying reconnect");
             // Block queue while there's no acces to Steam
             self._queue.block();
-            self.steamClient.reconnect();
+            self.steamClient.connect();
         };
         this.steamClient.on('connected', onConnected);
         this.steamClient.on('logOnResponse', onSteamLogOn);
