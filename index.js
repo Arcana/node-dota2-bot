@@ -63,7 +63,7 @@ module.exports = class DotaBot {
         },
         onSteamServers  = function onSteamServers(servers) {
             if (debug) util.log("Received servers.");
-            fs.writeFile('servers', JSON.stringify(servers));
+            fs.writeFileSync('servers', JSON.stringify(servers));
         },
         onSteamLogOff   = function onSteamLogOff(eresult) {
             if (debug) util.log("Logged off from Steam. Trying reconnect");
