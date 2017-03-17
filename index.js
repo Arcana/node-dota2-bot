@@ -11,7 +11,7 @@ module.exports = class DotaBot {
     /**
      * Constructor of the DotaBot. This prepares an object for connecting to
      * Steam and the Dota2 Game Coordinator.
-     * @param logonDetails {account_name: 'user', password: 'password'}
+     * @param logonDetails {"account_name": "user", "password": "password", "persona_name": "persona_name"}
      * @param debug boolean
      * @param debugMore boolean
      **/
@@ -43,7 +43,7 @@ module.exports = class DotaBot {
                 // Set status to online
                 self.steamFriends.setPersonaState(steam.EPersonaState.Online);
                 // Set nickname
-                self.steamFriends.setPersonaName(self._logonDetails.account_name);
+                self.steamFriends.setPersonaName(self._logonDetails.persona_name);
                 
                 if (debug) util.log('Logged on with id = '+self.Dota2.ToAccountID(self.Dota2._client.steamID));
                 self.Dota2.launch();
@@ -63,7 +63,7 @@ module.exports = class DotaBot {
         },
         onSteamServers  = function onSteamServers(servers) {
             if (debug) util.log("Received servers.");
-            fs.writeFile('servers', JSON.stringify(servers));
+            fs.writeFileSync('servers', JSON.stringify(servers));
         },
         onSteamLogOff   = function onSteamLogOff(eresult) {
             if (debug) util.log("Logged off from Steam. Trying reconnect");
