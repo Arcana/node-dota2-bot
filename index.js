@@ -36,7 +36,7 @@ module.exports = class DotaBot {
         
         let onConnected = function onConnected() {
             if (debug) util.log("Connected, logging on..");
-            self.steamUser.logOn(self._logonDetails);
+            self.steamUser.logOn({"account_name": self._logonDetails.account_name, "password": self._logonDetails.password});
         },
         onSteamLogOn    = function onSteamLogOn(logonResp){
             if (logonResp.eresult == steam.EResult.OK) {
