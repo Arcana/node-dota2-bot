@@ -1,6 +1,6 @@
 {
   "name": "dota2-bot",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A wrapper around the dota2 library that handles all login shenanigans",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Crazy-Duck/node-dota2-bot#readme",
   "dependencies": {
-    "dota2": "^5.1.0",
+    "dota2": "^6.2.0",
     "steam": "^1.4.0"
   }
 }
