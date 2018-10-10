@@ -29,6 +29,11 @@ module.exports = class DotaBot {
         this.Dota2.ServerRegion = dota2.ServerRegion;
         this.Dota2.EResult      = dota2.EResult;
         this.Dota2.Seriestype   = dota2.SeriesType;
+
+        // Load in server list if we've saved one before
+        if (fs.existsSync('servers')) {
+          steam.servers = JSON.parse(fs.readFileSync('servers'));
+        }
         
         let self = this;
         // Block queue until GC is ready
