@@ -16,6 +16,7 @@ module.exports = class DotaBot {
      * @param debugMore boolean
      **/
     constructor (logonDetails, debug, debugMore) {
+        steam.servers = JSON.parse(fs.readFileSync('./serverlist.json', 'UTF-8'));
         this._queue             = new queue(null, null, true);
         this._debug             = debug;
         this._debugMore         = debugMore;
