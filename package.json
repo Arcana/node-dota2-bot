@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Crazy-Duck/node-dota2-bot#readme",
   "dependencies": {
-    "dota2": "^6.2.0",
+    "dota2": "git://github.com/Arcana/node-dota2.git#staging",
     "steam": "^1.4.1"
   }
 }
