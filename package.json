@@ -10,11 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Crazy-Duck/node-dota2-bot.git"
   },
-  "keywords": [
-    "dota2",
-    "steam",
-    "bot"
-  ],
+  "keywords": ["dota2", "steam", "bot"],
   "author": "Crazy-Duck",
   "license": "MIT",
   "bugs": {
@@ -22,7 +18,7 @@
   },
   "homepage": "https://github.com/Crazy-Duck/node-dota2-bot#readme",
   "dependencies": {
-    "dota2": "git://github.com/Arcana/node-dota2.git#staging",
+    "dota2": "git://github.com/Arcana/node-dota2.git",
     "steam": "^1.4.1"
   }
 }
