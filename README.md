@@ -1,4 +1,6 @@
-# dota2-bot
+# node-dota2-bot
+This project is a fork from [Crazy-Duck's original bot](https://github.com/Arcana/node-dota2-bot)
+
 Wrapper around the node-dota2 library which handles all log-in shenanigans. 
 This basic DotaBot class prepares an object for connection to Steam and the 
 Dota2 Game Coordinator. As soon as `connect(callback)` is called, the DotaBot 
@@ -6,12 +8,12 @@ connects to Steam and the Dota2 GC. As soon as all connections are made,
 the queue is started. From then on, all scheduled functions will be executed as 
 soon as the GC is available.
 
-[![npm](https://img.shields.io/npm/v/dota2-bot.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/dota2-bot "Current version on npm")
-[![Dependency Status](https://img.shields.io/david/Crazy-Duck/node-dota2-bot.svg?maxAge=2592000&style=flat-square)](https://david-dm.org/Crazy-Duck/node-dota2-bot "Check this project's dependencies")
+[![npm](https://img.shields.io/npm/v/node-dota2-bot.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/node-dota2-bot "Current version on npm")
+[![Dependency Status](https://img.shields.io/david/t0shiii/node-dota2-bot.svg?maxAge=2592000&style=flat-square)](https://david-dm.org/t0shiii/node-dota2-bot "Check this project's dependencies")
 
 ## Usage
 ### Installation
-Run `npm install dota2-bot` to install the package or clone from GitHub
+Run `npm install node-dota2-bot` to install the package or clone from GitHub
 
 ### Properties
 * `steamClient` The steam client used to interact with Steam. See node-steam for details.

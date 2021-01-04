@@ -1,28 +1,31 @@
 {
-  "name": "dota2-bot",
-  "version": "1.2.0",
-  "description": "A wrapper around the dota2 library that handles all login shenanigans",
+  "name": "node-dota2-bot",
+  "version": "1.0.0",
+  "description": "A wrapper around the dota2 library forked from Crazy-Duck's original bot.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Crazy-Duck/node-dota2-bot.git"
+    "url": "git+https://github.com/t0shiii/node-dota2-bot.git"
   },
   "keywords": [
     "dota2",
     "steam",
     "bot"
   ],
-  "author": "Crazy-Duck",
+  "author": "t0shiii",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Crazy-Duck/node-dota2-bot/issues"
+    "url": "https://github.com/t0shiii/node-dota2-bot/issues"
   },
-  "homepage": "https://github.com/Crazy-Duck/node-dota2-bot#readme",
+  "homepage": "https://github.com/t0shiii/node-dota2-bot#readme",
   "dependencies": {
     "dota2": "^6.2.0",
     "steam": "^1.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.17.0"
   }
 }
